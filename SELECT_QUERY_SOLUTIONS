@@ -2,3 +2,20 @@ SELECT
 
 1757.Recyclable and Low Fat Products
 SELECT product_id from Products where low_fats ='Y' AND recyclable ='Y';
+
+584.Find Customer Referee
+SELECT name from Customer where referee_id != 2 OR referee_id IS NULL
+we can use COALESCE is an advanced function that the Oracle database supports. It is used to get the first non-null expression in the list.
+`COALESCE( expr_1, expr_2, ... expr_n )`
+Parameters:
+expr_1, expr_2, … expr_n:
+It is used to specify the expressions to be tested.
+Example :
+```
+SELECT COALESCE( value1, value2, value3 ) result
+FROM values;
+```
+---
+Explanation:
+Here, each value will be compared one by one by the COALESCE function for non-null values. If each value is null, the result will be NULL.
+

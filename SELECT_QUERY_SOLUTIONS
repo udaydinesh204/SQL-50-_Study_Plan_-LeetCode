@@ -19,3 +19,5 @@ FROM values;
 Explanation:
 Here, each value will be compared one by one by the COALESCE function for non-null values. If each value is null, the result will be NULL.
 
+595.Big Countries
+SELECT name , population, area FROM World WHERE area >= 3000000 OR population >= 25000000

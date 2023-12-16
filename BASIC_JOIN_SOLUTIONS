@@ -6,6 +6,11 @@ Employees LEFT JOIN EmployeeUNI ON Employees.id = EmployeeUNI.id;
 SELECT Product.product_name , Sales.year , Sales.price FROM 
 Sales LEFT JOIN Product ON Sales.product_id = Product.product_id;
 
+197. Rising Temperature
+SELECT W1.id FROM Weather AS W1 INNER JOIN Weather AS W2 
+ON DATEDIFF(W1.recordDate,W2.recordDate)=1 
+AND W1.temperature > W2.temperature;
+
 1661.Average Time of Process per Machine[There are 2 types of solutions]
 SELECT A1.machine_id, 
 ROUND(AVG(A2.timestamp - A1.timestamp), 3) AS processing_time FROM 

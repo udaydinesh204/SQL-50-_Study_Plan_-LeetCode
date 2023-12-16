@@ -5,3 +5,20 @@ Employees LEFT JOIN EmployeeUNI ON Employees.id = EmployeeUNI.id;
 1068.Product Sales Analysis I
 SELECT Product.product_name , Sales.year , Sales.price FROM 
 Sales LEFT JOIN Product ON Sales.product_id = Product.product_id;
+
+1661.Average Time of Process per Machine[There are 2 types of solutions]
+SELECT A1.machine_id, 
+ROUND(AVG(A2.timestamp - A1.timestamp), 3) AS processing_time FROM 
+Activity AS A1 INNER JOIN Activity AS A2 
+ON A1.machine_id = A2.machine_id AND A1.process_id = A2.process_id 
+AND A2.activity_type = 'end' AND A1.activity_type = 'start'
+GROUP BY machine_id;
+
+SELECT 
+A1.machine_id,
+ROUND(
+      (SELECT AVG(A2.timestamp) FROM Activity A2 WHERE A2.activity_type = 'end' AND A2.machine_id = A1.machine_id) - 
+      (SELECT AVG(A2.timestamp) FROM Activity A2 WHERE A2.activity_type = 'start' AND A2.machine_id = A1.machine_id)
+,3) as processing_time
+FROM Activity A1
+GROUND BY A1.machine_id;

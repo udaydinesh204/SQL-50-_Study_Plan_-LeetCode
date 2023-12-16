@@ -27,3 +27,8 @@ ROUND(
 ,3) as processing_time
 FROM Activity A1
 GROUND BY A1.machine_id;
+
+577. Employee Bonus
+SELECT Employee.name, Bonus.bonus FROM 
+Employee LEFT JOIN Bonus ON Employee.empId = Bonus.empId 
+WHERE Bonus.bonus < 1000 OR Bonus.bonus IS NULL;

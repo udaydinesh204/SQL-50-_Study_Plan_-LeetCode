@@ -59,3 +59,9 @@ SELECT E1.name FROM Employee AS E1 INNER JOIN Employee AS E2
 ON E1.id = E2.managerId 
 GROUP BY E2.managerId
 HAVING count(*) >= 5 ;
+
+1934. Confirmation Rate
+SELECT S.user_id , ROUND(AVG(IF(C.action="confirmed",1,0)),2) AS confirmation_rate 
+FROM Signups AS S LEFT JOIN Confirmations AS C  
+USING(user_id) 
+GROUP BY C.user_id;

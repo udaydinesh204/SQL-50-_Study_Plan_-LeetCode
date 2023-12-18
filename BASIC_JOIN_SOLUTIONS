@@ -11,7 +11,7 @@ SELECT W1.id FROM Weather AS W1 INNER JOIN Weather AS W2
 ON DATEDIFF(W1.recordDate,W2.recordDate)=1 
 AND W1.temperature > W2.temperature;
 
-1661.Average Time of Process per Machine[There are 2 types of solutions]
+**1661.Average Time of Process per Machine[There are 2 types of solutions]**
 SELECT A1.machine_id, 
 ROUND(AVG(A2.timestamp - A1.timestamp), 3) AS processing_time FROM 
 Activity AS A1 INNER JOIN Activity AS A2 
@@ -32,3 +32,12 @@ GROUND BY A1.machine_id;
 SELECT Employee.name, Bonus.bonus FROM 
 Employee LEFT JOIN Bonus ON Employee.empId = Bonus.empId 
 WHERE Bonus.bonus < 1000 OR Bonus.bonus IS NULL;
+
+1280. Students and Examinations
+SELECT S1.student_id , S1.student_name, 
+S2.subject_name , Count(E.student_id) AS attended_exams 
+FROM Students AS S1 CROSS JOIN Subjects AS S2
+LEFT JOIN Examinations AS E 
+ON S1.student_id = E.student_id AND S2.subject_name = E.subject_name
+GROUP BY S1.student_id, S1.student_name, S2.subject_name 
+ORDER BY S1.student_id ,S2.subject_name;

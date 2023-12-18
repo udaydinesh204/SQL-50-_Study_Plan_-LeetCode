@@ -33,7 +33,7 @@ SELECT Employee.name, Bonus.bonus FROM
 Employee LEFT JOIN Bonus ON Employee.empId = Bonus.empId 
 WHERE Bonus.bonus < 1000 OR Bonus.bonus IS NULL;
 
-1280. Students and Examinations
+1280. Students and Examinations [TWO SOLUTIONS]
 SELECT S1.student_id , S1.student_name, 
 S2.subject_name , Count(E.student_id) AS attended_exams 
 FROM Students AS S1 CROSS JOIN Subjects AS S2
@@ -41,3 +41,15 @@ LEFT JOIN Examinations AS E
 ON S1.student_id = E.student_id AND S2.subject_name = E.subject_name
 GROUP BY S1.student_id, S1.student_name, S2.subject_name 
 ORDER BY S1.student_id ,S2.subject_name;
+
+SELECT s.student_id, s.student_name, sub.subject_name, COALESCE(e.attended_exams, 0) AS attended_exams
+FROM Students s
+CROSS JOIN Subjects sub
+LEFT JOIN (
+    SELECT student_id, subject_name, COUNT(*) AS attended_exams
+    FROM Examinations
+    GROUP BY student_id, subject_name
+) e USING (student_id, subject_name)
+ORDER BY s.student_id, sub.subject_name;
+
+By using USING(common_column_name) is equal to ON Condition in joins;

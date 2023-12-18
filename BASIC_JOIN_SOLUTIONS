@@ -53,3 +53,9 @@ LEFT JOIN (
 ORDER BY s.student_id, sub.subject_name;
 
 By using USING(common_column_name) is equal to ON Condition in joins;
+
+570. Managers with at Least 5 Direct Reports
+SELECT E1.name FROM Employee AS E1 INNER JOIN Employee AS E2 
+ON E1.id = E2.managerId 
+GROUP BY E2.managerId
+HAVING count(*) >= 5 ;
